@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+.calculator {
+    display: flex;
+}
+
+.calculator__main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-start;
+}
+
+.calculator__aside {
+    flex: 0 0 200px;
+}
+
+.calculator__side {
+    border: 1px solid gray;
+    margin: 10px;
+    padding: 10px;
+    flex: 1 1 0;
+}

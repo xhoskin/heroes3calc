@@ -1,0 +1,12 @@
+<ul>
+    <li 
+        *ngFor="let creature of creatures"
+    >
+        <button 
+            type="button"
+            (click)="onSelect(creature)"
+        >
+            {{ creature.name }}
+        </button>
+    </li>
+</ul>
