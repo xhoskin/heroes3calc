@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { CreaturesListComponent } from './creatures-list/creatures-list.component';
-import { CreatureDetailComponent } from './creature-detail/creature-detail.component';
+import { CreaturesListComponent } from './component/creatures-list/creatures-list.component';
+import { CreatureDetailComponent } from './component/creature-detail/creature-detail.component';
 
-import { CreatureService } from './creature.service';
-import { CalcComponent } from './calc/calc.component';
+import { CreatureService } from './service/creature.service';
+import { CalcComponent } from './component/calc/calc.component';
+import { CalcService } from './service/calc.service';
 
 
 @NgModule({
@@ -17,10 +19,12 @@ import { CalcComponent } from './calc/calc.component';
         CalcComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        FormsModule
     ],
     providers: [
-        CreatureService
+        CreatureService,
+        CalcService
     ],
     bootstrap: [AppComponent]
 })

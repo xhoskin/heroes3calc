@@ -1,0 +1,7 @@
+<article *ngIf="battleSide.creature">
+    <h1>{{battleSide.creature.name}}</h1>
+    <p>Damage: <strong>{{battleSide.creature.damageMin}}-{{battleSide.creature.damageMax}}</strong> </p>
+    <p>Qty: 
+        <input type="number" name="quantity" [(ngModel)]="battleSide.quantity"/>
+    </p>
+</article>

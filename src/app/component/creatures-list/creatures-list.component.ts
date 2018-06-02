@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { Creature } from '../creature';
-import { CREATURES } from '../../data/creatures';
-import { CreatureService } from '../creature.service';
+import { Creature } from '../../model/creature';
+import { CREATURES } from '../../../data/creatures';
+import { CreatureService } from '../../service/creature.service';
+
 
 @Component({
     selector: 'creatures-list',

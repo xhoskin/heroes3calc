@@ -1,4 +1,4 @@
-import {Creature} from '../app/creature';
+import {Creature} from '../app/model/creature';
 
 export const CREATURES: Creature[] = [
     {

@@ -4,12 +4,15 @@
 
 .calculator__main {
     flex: 1 1 auto;
-    display: flex;
-    align-items: flex-start;
 }
 
 .calculator__aside {
     flex: 0 0 200px;
+}
+
+.calculator__sides {
+    display: flex;
+    align-items: flex-start;
 }
 
 .calculator__side {
@@ -17,4 +20,9 @@
     margin: 10px;
     padding: 10px;
     flex: 1 1 0;
+}
+
+.calculator__results {
+    margin: 10px;
+    padding: 10px;
 }

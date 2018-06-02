@@ -1,0 +1,42 @@
+<section class="calculator">
+    <aside class="calculator__aside">
+        <creatures-list 
+            [creatures]="creatures"
+            (onSelected)="calc.setPlayer($event)"
+        ></creatures-list>
+    </aside>
+    <main class="calculator__main">
+        <div class="calculator__sides">
+            <div class="calculator__side">
+                <creature-detail [battleSide]="calc.player"></creature-detail>
+            </div>
+            <div class="calculator__side">
+                <creature-detail [battleSide]="calc.enemy"></creature-detail>
+            </div>
+        </div>
+        <div class="calculator__result" *ngIf="calc.enemy">
+            Мы нанесем урон 
+            <span class="calc-value">
+                <span> {{ calc.totalDmg() }}</span>
+                <span class="mod-status" ng-class="modStatusClass(calc.modDmg())">
+                    (<span>{{modStatusPos(calc.modDmg())}}</span>
+                    <span>{{calc.modDmg()}}</span>%)
+                </span>
+            </span>
+            <br>
+            <strong>{{calc.enemiesLeft()}}</strong> 
+            <span>{{calc.enemy.creature.name}}</span> останутся в живых
+
+            <div class="unimportant">
+                Базовый урон: 
+                <div class="calc-value">{{calc.stackDmg()}}</div>
+            </div>
+        </div> 
+    </main>
+    <aside class="calculator__aside">
+        <creatures-list 
+            [creatures]="creatures"
+            (onSelected)="calc.setEnemy($event)"
+        ></creatures-list>
+    </aside>
+</section>
