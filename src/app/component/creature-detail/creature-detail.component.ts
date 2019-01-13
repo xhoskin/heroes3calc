@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Creature } from '../../model/creature';
-import { BattleSide } from '../../model/battle-side';
 
 @Component({
     selector: 'creature-detail',
@@ -10,7 +9,8 @@ import { BattleSide } from '../../model/battle-side';
 
 export class CreatureDetailComponent implements OnInit {
 
-    @Input() battleSide: BattleSide;
+    @Input() creature: Creature;
+    @Input() quantity: number;
 
     constructor() { }
 

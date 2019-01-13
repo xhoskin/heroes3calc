@@ -1,7 +1,13 @@
-<article *ngIf="battleSide.creature">
-    <h1>{{battleSide.creature.name}}</h1>
-    <p>Damage: <strong>{{battleSide.creature.damageMin}}-{{battleSide.creature.damageMax}}</strong> </p>
+<article *ngIf="creature">
+    <h1>
+        <a routerLink="/choose/player">{{battleSide.creature.name}}</a>
+    </h1>
+    <p>Damage: 
+        <strong>
+            {{battleSide.creature.damageMin}}-{{battleSide.creature.damageMax}}
+        </strong> 
+    </p>
     <p>Qty: 
-        <input type="number" name="quantity" [(ngModel)]="battleSide.quantity"/>
+        <input type="number" name="quantity" [(ngModel)]="quantity"/>
     </p>
 </article>

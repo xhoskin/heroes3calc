@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Creature } from '../../model/creature';
 import { CreatureService } from '../../service/creature.service';
 import { CalcService } from '../../service/calc.service';
-import { CREATURES } from '../../../data/creatures';
 import { BattleSide } from '../../model/battle-side';
+import { Observable } from 'rxjs/Observable';
+import { Creature } from '../../model/creature';
+import { calcBindingFlags } from '@angular/core/src/view/util';
 
 @Component({
     selector: 'calc',
@@ -11,15 +12,16 @@ import { BattleSide } from '../../model/battle-side';
     styleUrls: ['./calc.component.css']
 })
 export class CalcComponent implements OnInit {
+    constructor(
+        private creatureService: CreatureService,
+        private calcService: CalcService
+    ) { }
 
-    creatures: Creature[];
+    // player: BattleSide;
+    // enemy: BattleSide;
 
-    player: BattleSide;
-    enemy: BattleSide;
-
-    getCreatures(): void {
-        this.creatures = this.creatureService.getCreatures();
-    }
+    playerCreature: Creature;
+    enemyCreature: Creature;
 
     modStatusClass = function(val) {
         if ( val === 0 ) {
@@ -35,14 +37,18 @@ export class CalcComponent implements OnInit {
         return ( val > 0 ) ? '+' : '';
     }
 
-    constructor(
-        public creatureService: CreatureService,
-        public calc: CalcService
-    ) { }
-
     ngOnInit() {
-        this.getCreatures();
-        this.calc.player = new BattleSide(this.creatures[0]);
-        this.calc.enemy = new BattleSide(this.creatures[28]);
+        this.calcService.playerCreature$
+            .subscribe(playerCreature => { 
+                this.playerCreature = playerCreature
+            });
+            
+        this.calcService.enemyCreature$
+            .subscribe(enemyCreature => { 
+                 this.enemyCreature = enemyCreature
+            });
+
+        this.calcService.setPlayer(this.creatureService.list[0])
+        this.calcService.setEnemy(this.creatureService.list[28])
     }
 }
