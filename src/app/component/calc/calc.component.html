@@ -9,14 +9,16 @@
         <div class="calculator__sides">
             <div class="calculator__side">
                 <creature-detail 
-                    [creature]="playerCreature" 
-                    [quantity]="playerQuantity"
+                    [creature]="calc.playerCreature" 
+                    [quantity]="calc.playerQuantity"
+                    side="player"
                 ></creature-detail>
             </div>
             <div class="calculator__side">
                 <creature-detail 
-                    [creature]="enemyCreature" 
-                    [quantity]="enemyQuantity"
+                    [creature]="calc.enemyCreature" 
+                    [quantity]="calc.enemyQuantity"
+                    side="enemy"
                 ></creature-detail>
             </div>
         </div>

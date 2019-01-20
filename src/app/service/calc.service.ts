@@ -10,15 +10,10 @@ export class CalcService {
     // player: Observable<BattleSide>;
     // enemy: Observable<BattleSide>;
 
-    playerCreature: Creature;
-    enemyCreature:  Creature;
-    playerQuantity: number = 1;
-    enemyQuantity:   number = 1;
-
-    playerCreature$: Observable<Creature> = of(this.playerCreature);
-    enemyCreature$:  Observable<Creature> = of(this.enemyCreature);
-    playerQuantity$: Observable<number>;
-    enemQuantity$:   Observable<number>;
+    public playerCreature: Creature = null;
+    public enemyCreature:  Creature = null;
+    public playerQuantity: number = 1;
+    public enemyQuantity:  number = 1;
 
     constructor(
         creatures: CreatureService
@@ -26,11 +21,12 @@ export class CalcService {
     }
 
     setPlayer(creature: Creature) {
+        debugger;
         this.playerCreature = creature;
     }
 
     setEnemy(creature: Creature) {
-        this.playerCreature = creature;
+        this.enemyCreature = creature;
     }
 
     range(min, max){

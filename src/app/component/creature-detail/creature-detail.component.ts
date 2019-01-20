@@ -11,6 +11,7 @@ export class CreatureDetailComponent implements OnInit {
 
     @Input() creature: Creature;
     @Input() quantity: number;
+    @Input() side: string;
 
     constructor() { }
 

@@ -1,10 +1,10 @@
 <article *ngIf="creature">
     <h1>
-        <a routerLink="/choose/player">{{battleSide.creature.name}}</a>
+        <a routerLink="/choose/{{side}}">{{creature.name}}</a>
     </h1>
     <p>Damage: 
         <strong>
-            {{battleSide.creature.damageMin}}-{{battleSide.creature.damageMax}}
+            {{creature.damageMin}}-{{creature.damageMax}}
         </strong> 
     </p>
     <p>Qty: 

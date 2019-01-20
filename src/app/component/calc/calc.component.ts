@@ -5,6 +5,7 @@ import { BattleSide } from '../../model/battle-side';
 import { Observable } from 'rxjs/Observable';
 import { Creature } from '../../model/creature';
 import { calcBindingFlags } from '@angular/core/src/view/util';
+import { isNull } from 'util';
 
 @Component({
     selector: 'calc',
@@ -14,15 +15,9 @@ import { calcBindingFlags } from '@angular/core/src/view/util';
 export class CalcComponent implements OnInit {
     constructor(
         private creatureService: CreatureService,
-        private calcService: CalcService
+        private calc: CalcService
     ) { }
-
-    // player: BattleSide;
-    // enemy: BattleSide;
-
-    playerCreature: Creature;
-    enemyCreature: Creature;
-
+    
     modStatusClass = function(val) {
         if ( val === 0 ) {
             return 'hidden';
@@ -38,17 +33,9 @@ export class CalcComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.calcService.playerCreature$
-            .subscribe(playerCreature => { 
-                this.playerCreature = playerCreature
-            });
-            
-        this.calcService.enemyCreature$
-            .subscribe(enemyCreature => { 
-                 this.enemyCreature = enemyCreature
-            });
-
-        this.calcService.setPlayer(this.creatureService.list[0])
-        this.calcService.setEnemy(this.creatureService.list[28])
+        if (isNull(this.calc.playerCreature)) {
+            this.calc.setPlayer(this.creatureService.list[0]);
+            this.calc.setEnemy(this.creatureService.list[28]);
+        }
     }
 }

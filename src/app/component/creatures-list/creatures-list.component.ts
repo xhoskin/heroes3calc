@@ -31,16 +31,18 @@ export class CreaturesListComponent implements OnInit {
     }
 
     select(creature: Creature, side: any): void {
+        debugger;
         this.selectedCreature = creature;
-        if (this.side === ':player') {
+        if (this.side === 'player') {
             this.calc.setPlayer(creature);
-        } else if (this.side === ':enemy') {
+        } else if (this.side === 'enemy') {
             this.calc.setEnemy(creature);
         }
         this.location.back();
     }
 
     ngOnInit() {
+        debugger;
         this.getCreatures();
         this.side = this.route.snapshot.paramMap.get('side');
     }
