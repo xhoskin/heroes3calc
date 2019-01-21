@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreatureDetailComponent } from './creature-detail.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule } from '@angular/forms';
+import { CreatureService } from '../../service/creature.service';
+import { CalcService } from '../../service/calc.service';
 
 describe('CreatureDetailComponent', () => {
   let component: CreatureDetailComponent;
@@ -8,7 +12,17 @@ describe('CreatureDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatureDetailComponent ]
+      declarations: [
+        CreatureDetailComponent 
+      ],
+      imports: [
+        RouterTestingModule,
+        FormsModule
+      ],
+      providers: [
+        CreatureService,
+        CalcService,
+      ]
     })
     .compileComponents();
   }));

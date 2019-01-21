@@ -1,20 +1,32 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreatureComponent } from './creature.component';
+import { CreaturesListComponent } from './creatures-list.component';
+import { CreatureService } from '../../service/creature.service';
+import { CalcService } from '../../service/calc.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('CreatureComponent', () => {
-  let component: CreatureComponent;
-  let fixture: ComponentFixture<CreatureComponent>;
+describe('CreaturesListComponent', () => {
+  let component: CreaturesListComponent;
+  let fixture: ComponentFixture<CreaturesListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatureComponent ]
+      declarations: [
+        CreaturesListComponent
+      ],
+      imports: [
+        RouterTestingModule
+      ],
+      providers: [
+        CreatureService,
+        CalcService,
+      ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreatureComponent);
+    fixture = TestBed.createComponent(CreaturesListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
