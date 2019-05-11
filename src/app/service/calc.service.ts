@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Creature } from '../model/creature';
 import { BattleSide } from '../model/battle-side';
 import { CreatureService } from './creature.service';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable ,  of } from 'rxjs';
 
 @Injectable()
 export class CalcService {
@@ -21,7 +20,6 @@ export class CalcService {
     }
 
     setPlayer(creature: Creature) {
-        debugger;
         this.playerCreature = creature;
     }
 
