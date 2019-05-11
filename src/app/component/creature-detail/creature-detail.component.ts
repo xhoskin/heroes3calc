@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Creature } from '../../model/creature';
+import { CalcService } from '../../service/calc.service';
+import { CreatureService } from '../../service/creature.service';
 
 @Component({
     selector: 'creature-detail',
@@ -7,15 +9,14 @@ import { Creature } from '../../model/creature';
     styleUrls: ['./creature-detail.component.css']
 })
 
-export class CreatureDetailComponent implements OnInit {
-
-    @Input() creature: Creature;
-    @Input() quantity: number;
+export class CreatureDetailComponent {
     @Input() side: string;
 
-    constructor() { }
+    constructor(
+        public calc: CalcService
+    ) { }
 
-    ngOnInit() {
+    get creature(){
+        return this.calc[this.side+'Creature'];
     }
-
 }

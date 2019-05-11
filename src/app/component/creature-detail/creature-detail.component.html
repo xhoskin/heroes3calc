@@ -1,13 +1,11 @@
-<article *ngIf="creature">
-    <h1>
-        <a routerLink="/choose/{{side}}">{{creature.name}}</a>
-    </h1>
-    <p>Damage: 
-        <strong>
-            {{creature.damageMin}}-{{creature.damageMax}}
-        </strong> 
-    </p>
-    <p>Qty: 
-        <input type="number" name="quantity" [(ngModel)]="quantity"/>
-    </p>
-</article>
+<h1>
+    <a routerLink="/choose/{{side}}">{{creature.name}}</a>
+</h1>
+<p>Damage: 
+    <strong>
+        {{creature.damageMin}}-{{creature.damageMax}}
+    </strong> 
+</p>
+<p>Qty: 
+    <input type="number" name="quantity" [(ngModel)]="calc[side+'Quantity']"/>
+</p>

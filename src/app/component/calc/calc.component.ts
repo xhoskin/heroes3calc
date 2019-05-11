@@ -14,8 +14,8 @@ import { isNull } from 'util';
 })
 export class CalcComponent implements OnInit {
     constructor(
-        private creatureService: CreatureService,
-        private calc: CalcService
+        public creatureService: CreatureService,
+        public calc: CalcService
     ) { }
     
     modStatusClass = function(val) {
