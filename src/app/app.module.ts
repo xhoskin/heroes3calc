@@ -12,6 +12,7 @@ import { CalcComponent } from './component/calc/calc.component';
 import { CreatureService } from './service/creature.service';
 import { CalcService } from './service/calc.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AppRoutingModule } from './/app-routing.module';
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        RouterModule
+        RouterModule,
+        HttpClientModule
     ],
     providers: [
         CreatureService,

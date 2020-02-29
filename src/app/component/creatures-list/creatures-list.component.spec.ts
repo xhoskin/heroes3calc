@@ -11,6 +11,7 @@ fdescribe('CreaturesListComponent', () => {
     let component: CreaturesListComponent;
     let fixture: ComponentFixture<CreaturesListComponent>;
     let creatureService: jasmine.SpyObj<CreatureService>;
+    let calcService: jasmine.SpyObj<CalcService>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -22,7 +23,7 @@ fdescribe('CreaturesListComponent', () => {
             ],
             providers: [
                 { provide: CreatureService, useFactory: () => spyOnClass(CreatureService)},
-                CalcService,
+                { provide: CalcService, useFactory: () => spyOnClass(CalcService)},
             ]
         })
         .compileComponents();
@@ -32,6 +33,7 @@ fdescribe('CreaturesListComponent', () => {
         fixture = TestBed.createComponent(CreaturesListComponent);
         component = fixture.componentInstance;
         creatureService = TestBed.get(CreatureService);
+        calcService = TestBed.get(CalcService);
         creatureService.getCreatures.and.returnValue(of([
             {
                 "name": "Копейщик",
@@ -71,5 +73,22 @@ fdescribe('CreaturesListComponent', () => {
 
     it('should display creature info', () => {
         expect(fixture.nativeElement.querySelector('button').innerText).toEqual('Копейщик');
+    });
+
+
+    it('should change player\'s creature', () => {
+
+        // Set side
+        fixture.componentInstance.side = 'player';
+
+        // Find second button,
+        const targetBtn = fixture.nativeElement.querySelectorAll('button')[1];
+        expect(targetBtn.textContent).toContain('Алебардщик');
+
+        // Click on it.
+        targetBtn.click();
+
+        // Player's creature should change
+        expect(calcService.setPlayer).toHaveBeenCalled();
     });
 });

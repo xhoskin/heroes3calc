@@ -12,6 +12,8 @@ import { isNull } from 'util';
     styleUrls: ['./calc.component.css']
 })
 export class CalcComponent implements OnInit {
+    public creatures: Creature[];
+
     constructor(
         public creatureService: CreatureService,
         public calc: CalcService
@@ -32,9 +34,14 @@ export class CalcComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (isNull(this.calc.playerCreature)) {
-            this.calc.setPlayer(this.creatureService.list[0]);
-            this.calc.setEnemy(this.creatureService.list[28]);
-        }
+        this.creatureService.getCreatures().subscribe((creatures) => {
+            this.creatures = creatures;
+            if (!this.calc.playerCreature) {
+                this.calc.setPlayer(this.creatures[0]);
+            }
+            if (!this.calc.enemyCreature) {
+                this.calc.setEnemy(this.creatures[28]);
+            }
+        });
     }
 }
