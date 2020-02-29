@@ -4,7 +4,6 @@ import { CalcService } from '../../service/calc.service';
 import { BattleSide } from '../../model/battle-side';
 import { Observable } from 'rxjs';
 import { Creature } from '../../model/creature';
-import { calcBindingFlags } from '@angular/core/src/view/util';
 import { isNull } from 'util';
 
 @Component({
