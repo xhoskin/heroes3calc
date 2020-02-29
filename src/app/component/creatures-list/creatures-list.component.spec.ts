@@ -31,7 +31,7 @@ describe('CreaturesListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display creatures', () => {
+    expect(fixture.nativeElement.querySelector('button')).toBeTruthy();
   });
 });
