@@ -7,7 +7,7 @@ import { CreatureService } from '../../service/creature.service';
 import { CalcService } from '../../service/calc.service';
 import { RouterTestingModule } from '@angular/router/testing';
 
-fdescribe('CreaturesListComponent', () => {
+describe('CreaturesListComponent', () => {
     let component: CreaturesListComponent;
     let fixture: ComponentFixture<CreaturesListComponent>;
     let creatureService: jasmine.SpyObj<CreatureService>;
@@ -34,36 +34,9 @@ fdescribe('CreaturesListComponent', () => {
         component = fixture.componentInstance;
         creatureService = TestBed.get(CreatureService);
         calcService = TestBed.get(CalcService);
-        creatureService.getCreatures.and.returnValue(of([
-            {
-                "name": "Копейщик",
-                "level": 1,
-                "damageMin": 1,
-                "damageMax": 3,
-                "attack": 4,
-                "defense": 5,
-                "health": 10,
-                "speed": 4,
-                "growth": 14,
-                "goldPrice": 60,
-                "resourcePrice": "",
-                "city": 0
-            },
-            {
-                "name": "Алебардщик",
-                "level": 1,
-                "damageMin": 2,
-                "damageMax": 3,
-                "attack": 6,
-                "defense": 5,
-                "health": 10,
-                "speed": 5,
-                "growth": 14,
-                "goldPrice": 75,
-                "resourcePrice": "",
-                "city": 0
-            }
-        ]));
+
+        const creatures = require('../../../assets/data/creatures.json');
+        creatureService.getCreatures.and.returnValue(of(creatures));
         fixture.detectChanges();
     });
 
