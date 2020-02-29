@@ -27,7 +27,7 @@ export class CreaturesListComponent implements OnInit {
 
     getCreatures() {
         this.creatureService.getCreatures()
-            .subscribe(creatures => this.creatures = creatures)
+            .subscribe(creatures => this.creatures = creatures);
     }
 
     select(creature: Creature, side: any): void {
