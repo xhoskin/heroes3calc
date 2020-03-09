@@ -33,14 +33,19 @@ export class CalcComponent implements OnInit {
         return ( val > 0 ) ? '+' : '';
     }
 
+    getCreature(name: string): Creature {
+        return this.creatures.find(creature => creature.name === name);
+    }
+
     ngOnInit() {
         this.creatureService.getCreatures().subscribe((creatures) => {
             this.creatures = creatures;
             if (!this.calc.playerCreature) {
-                this.calc.setPlayer(this.creatures[0]);
+                this.calc.setPlayer(this.getCreature('Нага'));
             }
             if (!this.calc.enemyCreature) {
-                this.calc.setEnemy(this.creatures[28]);
+                this.calc.setEnemy(this.getCreature('Копейщик'));
+                this.calc.enemyQuantity = 10;
             }
         });
     }

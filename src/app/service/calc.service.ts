@@ -3,6 +3,8 @@ import { Creature } from '../model/creature';
 import { BattleSide } from '../model/battle-side';
 import { CreatureService } from './creature.service';
 import { Observable ,  of } from 'rxjs';
+import { calculationResult } from '../interface/calculation-result.interface';
+
 
 @Injectable()
 export class CalcService {
@@ -31,7 +33,7 @@ export class CalcService {
         return min === max ? min : min + '-' + max
     }
     
-    damage(baseDmg) {
+    damage(baseDmg): calculationResult {
         // baseDmg -  базовый урон существа
 
         // условный множитель урона 
@@ -41,13 +43,14 @@ export class CalcService {
         } else {
             var multDmg = 0.025;
         }
+        ;
 
         // модификатор урона
         // если атака больше то за каждую единицу +5% урона
         // если защита больше то за каждую единицу -25% урона
         // МD(баз) = (Атака - Защита) * 005  
         // MD(баз) = (Атака - Защита) * 0025 
-        var modDmg = ( this.playerCreature.attack - this.playerCreature.defense ) * multDmg;
+        var modDmg = ( this.playerCreature.attack - this.enemyCreature.defense ) * multDmg;
 
         // допустимый промежуток для модификатора: [-70% 300%] урона
         if ( modDmg > 3 ) { 
@@ -112,15 +115,28 @@ export class CalcService {
     }
 
     enemiesLeft() {
-        var stackHealth = this.playerCreature.health * this.enemyQuantity;
+        var stackHealth = this.enemyCreature.health * this.enemyQuantity;
         var healthLeft = {
             min: stackHealth - this.min().totalDmg,
             max: stackHealth - this.max().totalDmg
         }
 
         return this.range( 
-            healthLeft.max > 0 ? Math.floor(healthLeft.max / this.playerCreature.health) : 0,
-            healthLeft.min > 0 ? Math.floor(healthLeft.min / this.playerCreature.health) : 0 
+            healthLeft.max > 0 ? Math.floor(healthLeft.max / this.enemyCreature.health) + 1 : 0,
+            healthLeft.min > 0 ? Math.floor(healthLeft.min / this.enemyCreature.health) + 1  : 0 
+        );
+    }
+
+    enemiesWillDie() {
+        var stackHealth = this.enemyCreature.health * this.enemyQuantity;
+        var healthLeft = {
+            min: stackHealth - this.min().totalDmg,
+            max: stackHealth - this.max().totalDmg
+        }
+
+        return this.range( 
+            healthLeft.max > 0 ? this.enemyQuantity - Math.round(healthLeft.max / this.enemyCreature.health) : 0,
+            healthLeft.min > 0 ? this.enemyQuantity - Math.round(healthLeft.min / this.enemyCreature.health) : 0 
         );
     }
 }
