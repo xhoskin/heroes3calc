@@ -5,7 +5,6 @@ import { CreatureService } from './creature.service';
 import { Observable ,  of } from 'rxjs';
 import { calculationResult } from '../interface/calculation-result.interface';
 
-
 @Injectable()
 export class CalcService {
     // player: Observable<BattleSide>;
@@ -32,35 +31,40 @@ export class CalcService {
     range(min, max){
         return min === max ? min : min + '-' + max
     }
-    
-    damage(baseDmg): calculationResult {
-        // baseDmg -  базовый урон существа
+
+    damageMultiplier(): number {
+        const percent = .01;
 
         // условный множитель урона 
         // зависит от того больше или меньше атака и защита
-        if ( this.playerCreature.attack >= this.playerCreature.defense ) {
-            var multDmg = 0.05;
+        if ( this.playerCreature.attack >= this.enemyCreature.defense ) {
+            var multDmg = 5 * percent;
         } else {
-            var multDmg = 0.025;
+            var multDmg = 2.5 * percent;
         }
-        ;
-
+        
         // модификатор урона
         // если атака больше то за каждую единицу +5% урона
         // если защита больше то за каждую единицу -25% урона
-        // МD(баз) = (Атака - Защита) * 005  
-        // MD(баз) = (Атака - Защита) * 0025 
-        var modDmg = ( this.playerCreature.attack - this.enemyCreature.defense ) * multDmg;
+        // МD(баз) = (Атака - Защита) * .05  
+        // MD(баз) = (Атака - Защита) * .025 
+        var modDmg = (this.playerCreature.attack - this.enemyCreature.defense) * multDmg;
 
-        // допустимый промежуток для модификатора: [-70% 300%] урона
+        // допустимый промежуток для модификатора: [-70%...+300%] урона
         if ( modDmg > 3 ) { 
             modDmg = 3;
         } else if ( modDmg < -0.7 ) { 
             modDmg = -0.7;
         }
 
+        return modDmg;
+    }
+    
+    damage(baseDmg): calculationResult {
+        // baseDmg -  базовый урон существа
+
         // урон с учетом модификатора
-        var modifiedDmg = baseDmg * modDmg;
+        var modifiedDmg = baseDmg * this.damageMultiplier();
 
         // итоговая формула урона
         var totalDmg = (modifiedDmg + baseDmg) * this.playerQuantity;
@@ -68,7 +72,7 @@ export class CalcService {
         return {
             baseDmg:  baseDmg * this.playerQuantity,
             totalDmg: totalDmg,
-            modDmg:   ( modDmg * 100 )
+            modDmg:   ( this.damageMultiplier() * 100 )
         }
 
     }
